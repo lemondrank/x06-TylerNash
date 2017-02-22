@@ -41,7 +41,7 @@ void TicTacToeBoard::clearBoard()
 **/ 
 Piece TicTacToeBoard::placePiece(int row, int column)
 {
-	if(row > 2 || column>2)
+	if(row > 2 || column>2 || row < 0 || column<0)
 		return Invalid;
 	else if(board[row][column] != Blank)
 		return board[row][column];
@@ -65,9 +65,12 @@ Piece TicTacToeBoard::placePiece(int row, int column)
  * Returns what piece is at the provided coordinates, or Blank if there
  * are no pieces there, or Invalid if the coordinates are out of bounds
 **/
-Piece TicTacToeBoard::getPiece(int row, int columnumn)
+Piece TicTacToeBoard::getPiece(int row, int column)
 {
-  return Invalid;
+	if(row < 0 || column < 0 || row > 2 || column > 2)
+		return Invalid;
+	else
+		return board[row][column];
 }
 
 /**
