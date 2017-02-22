@@ -18,3 +18,10 @@ TEST(TicTacToeBoardTest, sanityCheck)
 {
 	ASSERT_TRUE(true);
 }
+TEST(TicTacToeBoardTest, PlacePiece)
+{
+	TicTacToeBoard t;
+	ASSERT_EQ(X, t.placePiece(0, 0));
+}
+	
+
