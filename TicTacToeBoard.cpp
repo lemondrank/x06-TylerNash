@@ -13,7 +13,7 @@ void TicTacToeBoard::toggleTurn()
 		turn = X;
 }
 
-//Constructor sets an empty board and specifies it is X's turn first
+//cONstructor sets an empty board and specifies it is X's turn first
 TicTacToeBoard::TicTacToeBoard()
 {
 	turn = X;
@@ -43,7 +43,7 @@ Piece TicTacToeBoard::placePiece(int row, int column)
 {
 	if(row > 2 || column>2 || row < 0 || column<0)
 		return Invalid;
-	else if(board[row][column] != Blank)
+	if(board[row][column] != Blank)
 		return board[row][column];
 	else {
 		if(turn == X)
@@ -79,5 +79,33 @@ Piece TicTacToeBoard::getPiece(int row, int column)
 **/
 Piece TicTacToeBoard::getWinner()
 {
-  return Invalid;
+	//horizontal win
+	for(int i=0; i<3; ++i) {
+		if((*board[i] == board[i][1]) && (board[i][1] == board[i][2]))
+			return board[i][1];
+	}
+	//vertical win
+	for(int i=0; i<3; i++) {
+		if(board[0][i] == board[1][i] && board[1][i] == board[2][i])
+			return board[0][i];
+	}
+	//diagonal win (top left to bottom right)
+	if(board[0][0] == board[1][1] && board[1][1] == board[2][2])
+		return board[0][0];
+	//diagonal win (top right to bottom left)
+	if(board[0][2] == board[1][1] && board[1][1] == board[2][0])
+		return board[1][1];
+
+	//if we made it here, then there is no winner
+	//have to check for empty spaces
+	if(getPiece(0,0) == Blank)
+		return Invalid;
+	for(int i=0; i<3; i++) {
+		for(int j=0; j<3; j++) {
+			if(board[i][j] == Blank)
+				return Invalid;
+		}
+	}
+	//if we made it here, then there are no empty spaces and no winner
+	return Blank;			
 }
